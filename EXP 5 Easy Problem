@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class SumOfIntegers {
+    
+    public static void main(String[] args) {
+        List<Integer> integerList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter integers (type 'done' to finish):");
+        
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("done")) {
+                break;
+            }
+            try {
+                // Parse the string input to an Integer and add it to the list
+                Integer number = parseStringToInteger(input);
+                integerList.add(number); // Autoboxing happens here
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+            }
+        }
+        
+        // Calculate the sum using unboxing
+        int sum = calculateSum(integerList);
+        System.out.println("The sum of the list is: " + sum);
+        
+        scanner.close();
+    }
+
+    // Method to parse a string to an Integer
+    public static Integer parseStringToInteger(String str) {
+        return Integer.parseInt(str); // This will throw NumberFormatException if the input is not a valid integer
+    }
+
+    // Method to calculate the sum of a list of integers
+    public static int calculateSum(List<Integer> integers) {
+        int sum = 0;
+        for (Integer integer : integers) {
+            sum += integer; // Unboxing happens here
+        }
+        return sum;
+    }
+}
